@@ -12,6 +12,7 @@ If you want to install RAPP API in your system do the following:
 ```
 cd python
 sudo pip install -r requirements.txt
+sudo pip install pyyaml
 sudo python setup.py install
 ```
 
@@ -21,6 +22,7 @@ virtualenv env
 source env/bin/activate
 cd python
 pip install -r requirements.txt
+pip install pyyaml
 python setup.py install
 ```
 
