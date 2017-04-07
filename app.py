@@ -6,4 +6,4 @@ import sys
 from RappCloud import RappPlatformAPI
 ch = RappPlatformAPI()
 
-
+print ch.weatherReportCurrent('Athens')
