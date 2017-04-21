@@ -41,6 +41,7 @@ class SSLDef:
 
     SSL/TLS protocol versions definitions
     """
+    TLS = None
     TLSv1 = None
     TLSv1_1 = None
     TLSv1_2 = None
@@ -55,11 +56,12 @@ if sys.version_info[:3] >= (2, 7, 9):
     """
     import ssl  # Python 2.7 ssl library
     print "\n--> Using python's ssl module with support to TLS v1_1 and 1_2"
+    SSLDef.TLS = ssl.PROTOCOL_TLSv1_2
     SSLDef.TLSv1 = ssl.PROTOCOL_TLSv1
     SSLDef.TLSv1_1 = ssl.PROTOCOL_TLSv1_1
     SSLDef.TLSv1_2 = ssl.PROTOCOL_TLSv1_2
-    SSLDef.SSLv2 = ssl.PROTOCOL_SSLv2
-    SSLDef.SSLv3 = ssl.PROTOCOL_SSLv3
+    SSLDef.SSLv2 = ssl.PROTOCOL_TLS
+    SSLDef.SSLv3 = ssl.PROTOCOL_SSLv23
     SSLDef.SSLv2_3 = ssl.PROTOCOL_SSLv23
 else:
     """ Else import pyopenssl and load tls1_1 and tls_1_2 if available.
@@ -77,6 +79,7 @@ else:
         """
         requests.packages.urllib3.disable_warnings()
 
+        SSLDef.TLS = SSL.TLSv1_2_METHOD
         SSLDef.TLSv1 = SSL.TLSv1_METHOD
         SSLDef.TLSv1_1 = SSL.TLSv1_1_METHOD
         SSLDef.TLSv1_2 = SSL.TLSv1_2_METHOD
@@ -91,6 +94,7 @@ else:
         import ssl  # Python 2.7 ssl library
         print str(e)
         print "\n--> Falling back to python's ssl library without tlsv1_2 support"
+        SSLDef.TLS = ssl.PROTOCOL_TLS
         SSLDef.TLSv1 = ssl.PROTOCOL_TLSv1
         SSLDef.TLSv1_1 = ssl.PROTOCOL_TLSv1
         SSLDef.TLSv1_2 = ssl.PROTOCOL_TLSv1
@@ -105,6 +109,8 @@ else:
             " TLSv1.1 and 1.2 support"
         print "--> Falling back to TLSv1"
 
+        SSLDef.TLS = SSL.TLSv1_METHOD
+        SSLDef.TLSv1 = SSL.TLSv1_METHOD
         SSLDef.TLSv1 = SSL.TLSv1_METHOD
         SSLDef.TLSv1_1 = SSL.TLSv1_METHOD
         SSLDef.TLSv1_2 = SSL.TLSv1_METHOD
@@ -131,7 +137,7 @@ class SSLAdapter(HTTPAdapter):
 class TLSAdapter(SSLAdapter):
     """ TLS Default transport Adapter """
     def __init__(self, **kwargs):
-        super(TLSAdapter, self).__init__(ssl_version=None, **kwargs)
+        super(TLSAdapter, self).__init__(ssl_version=SSLDef.TLS, **kwargs)
 
 
 class TLS1Adapter(SSLAdapter):
