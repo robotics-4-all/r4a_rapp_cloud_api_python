@@ -60,7 +60,7 @@ if sys.version_info[:3] >= (2, 7, 9):
     SSLDef.TLSv1 = ssl.PROTOCOL_TLSv1
     SSLDef.TLSv1_1 = ssl.PROTOCOL_TLSv1_1
     SSLDef.TLSv1_2 = ssl.PROTOCOL_TLSv1_2
-    SSLDef.SSLv2 = ssl.PROTOCOL_TLS
+    SSLDef.SSLv2 = ssl.PROTOCOL_TLSv1
     SSLDef.SSLv3 = ssl.PROTOCOL_SSLv23
     SSLDef.SSLv2_3 = ssl.PROTOCOL_SSLv23
 else:
@@ -94,11 +94,11 @@ else:
         import ssl  # Python 2.7 ssl library
         print str(e)
         print "\n--> Falling back to python's ssl library without tlsv1_2 support"
-        SSLDef.TLS = ssl.PROTOCOL_TLS
+        SSLDef.TLS = ssl.PROTOCOL_TLSv1
         SSLDef.TLSv1 = ssl.PROTOCOL_TLSv1
         SSLDef.TLSv1_1 = ssl.PROTOCOL_TLSv1
         SSLDef.TLSv1_2 = ssl.PROTOCOL_TLSv1
-        SSLDef.SSLv2 = ssl.PROTOCOL_SSLv2
+        SSLDef.SSLv2 = ssl.PROTOCOL_SSLv23
         SSLDef.SSLv3 = ssl.PROTOCOL_SSLv3
         SSLDef.SSLv2_3 = ssl.PROTOCOL_SSLv23
 
