@@ -11,20 +11,14 @@ The documentation of the API calls exists [here](https://github.com/robotics-4-a
 If you want to install RAPP API in your system do the following:
 ```
 cd python
-sudo pip install -r requirements.txt
-sudo pip install pyyaml
-sudo python setup.py install
+sudo pip install .
 ```
 
 If you want to use a virtual environment:
 ```
 virtualenv env
 source env/bin/activate
-cd python
-pip install -r requirements.txt
-pip install pyyaml
-python setup.py install
+pip install .
 ```
 
-You can find a sample application [here](https://github.com/robotics-4-all/r4a_RAPP_cloud_api_python/blob/master/app.py).
-
+You can find a sample application [here](https://github.com/robotics-4-all/r4a_RAPP_cloud_api_python/blob/master/examples/app.py).

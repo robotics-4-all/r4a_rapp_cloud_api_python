@@ -24,7 +24,8 @@ setup(
         'urllib3',
         'pyopenssl',
         'pyasn1',
-        'futures==3.0.5'
+        'futures',
+        'pyyaml'
     ],
     name='RappCloud',
     version='0.6.0',
